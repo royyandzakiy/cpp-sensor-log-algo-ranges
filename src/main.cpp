@@ -30,7 +30,7 @@ auto generate_sample_data(size_t data_count = 100) {
 							 .unit = units.at(idx)};
 		});
 
-	return std::vector<DataPoint>(data_generator_view.begin(), data_generator_view.end());
+	return data_generator_view | std::ranges::to<std::vector<DataPoint>>();
 }
 
 auto main() -> int {
