@@ -1,11 +1,6 @@
 cmake_minimum_required(VERSION 3.28..3.31)
 
 # =============================================================================
-# Conan Pre-configure
-# =============================================================================
-include(cmake/conan-preconfigure.cmake)
-
-# =============================================================================
 # Project Configuration
 # =============================================================================
 project(sensor_log_algo_ranges 
@@ -23,12 +18,10 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 cmake_policy(SET CMP0091 NEW)
 
 if(MSVC)
-    add_compile_options(/W4 /permissive-)
-    # add_compile_options(/WX) # more strict
+    add_compile_options(/W4 /permissive- /WX)
 else()
     # Clang/GCC
-    add_compile_options(-Wall -Wextra)
-    # add_compile_options(-Werror -pedantic) # more strict
+    add_compile_options(-Wall -Wextra -Werror -pedantic)
 endif()
 
 # =============================================================================

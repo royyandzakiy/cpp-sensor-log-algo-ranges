@@ -39,7 +39,7 @@ auto main() -> int {
 		std::println("{}", data.value);
 	}
 
-	DataLog datalog(sample_data);
+	DataLog datalog{sample_data};
 	datalog.print();
 	datalog.save("my_saved_log.txt");
 	return 0;
