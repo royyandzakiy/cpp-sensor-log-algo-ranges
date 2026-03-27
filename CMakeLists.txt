@@ -25,6 +25,26 @@ else()
 endif()
 
 # =============================================================================
+# Sanitizers Configuration (Clang/GCC only)
+# =============================================================================
+option(ENABLE_SANITIZERS "Enable Address, Undefined, and Leak sanitizers" ON)
+
+if(ENABLE_SANITIZERS AND NOT MSVC)
+    message(STATUS "Building with Address, Undefined, and Leak Sanitizers")
+    
+    set(SANITIZER_FLAGS 
+        -fsanitize=address,undefined,leak 
+        -fno-omit-frame-pointer
+    )
+    
+    # Add to compiler flags
+    add_compile_options(${SANITIZER_FLAGS})
+    
+    # Add to linker flags (CRITICAL: sanitizers need library linking)
+    add_link_options(${SANITIZER_FLAGS})
+endif()
+
+# =============================================================================
 # Dependencies
 # =============================================================================
 # find_package(fmt REQUIRED)

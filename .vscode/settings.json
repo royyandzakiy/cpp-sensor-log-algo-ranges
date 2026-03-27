@@ -5,14 +5,12 @@
 	// --- Code Analysis ---
 	"C_Cpp.codeAnalysis.clangTidy.enabled": true,
 	"C_Cpp.codeAnalysis.clangTidy.path": "clang-tidy",
-	"C_Cpp.codeAnalysis.clangTidy.buildPath": "${workspaceFolder}/build",
 	"C_Cpp.codeAnalysis.runAutomatically": true,
 	// --- Formatting ---
 	"editor.formatOnSave": true,
 	"editor.insertSpaces": false,
 	"editor.tabSize": 4,
 	"editor.detectIndentation": false,
-	"clang-format.style": "file",
 	// --- Include Associations (standard C++ headers) ---
 	"files.associations": {
 		"*.defaults": "kconfig",
@@ -65,6 +63,4 @@
 		"xutility": "cpp",
 		"print": "cpp"
 	},
-	"C_Cpp.default.cppStandard": "c++23",
-	"iis.configDir": ""
 }

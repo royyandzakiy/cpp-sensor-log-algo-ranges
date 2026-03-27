@@ -25,7 +25,7 @@ class DataLog {
 	std::vector<DataPoint> m_logs{};
 
   public:
-	DataLog(std::vector<DataPoint> &logs) : m_logs(std::move(logs)) {
+	DataLog(std::vector<DataPoint> logs) : m_logs(std::move(logs)) {
 	}
 
 	void add(DataPoint dataPoint) {
