@@ -1,0 +1,183 @@
+{
+	"version": 3,
+	"cmakeMinimumRequired": {
+		"major": 3,
+		"minor": 28,
+		"patch": 0
+	},
+	"configurePresets": [
+		{
+			"displayName": "clang-ninja-base",
+			"name": "clang-ninja-base",
+			"description": "Configure using Clang compiler with Ninja generator",
+			"generator": "Ninja",
+			"cacheVariables": {
+				"CONAN_PROFILE": "clang",
+				"CMAKE_C_COMPILER": "clang",
+				"CMAKE_CXX_COMPILER": "clang++"
+			},
+			"binaryDir": "${sourceDir}/build-clang",
+			"hidden": true
+		},
+		{
+			"displayName": "clang-release",
+			"name": "clang-release",
+			"description": "Configure using Clang compiler with Ninja generator (Release)",
+			"inherits": "clang-ninja-base",
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "Release"
+			},
+			"toolchainFile": "build/Release/generators/conan_toolchain.cmake"
+		},
+		{
+			"displayName": "clang-debug",
+			"name": "clang-debug",
+			"description": "Configure using Clang compiler with Ninja generator (Debug)",
+			"inherits": "clang-ninja-base",
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "Debug"
+			},
+			"toolchainFile": "build/Debug/generators/conan_toolchain.cmake"
+		},
+		{
+			"displayName": "msvc-vs2022",
+			"name": "msvc-vs2022",
+			"description": "Configure using MSVC with Visual Studio 2022 generator",
+			"generator": "Visual Studio 17 2022",
+			"cacheVariables": {
+				"CONAN_PROFILE": "msvc",
+				"CMAKE_C_COMPILER": "cl",
+				"CMAKE_CXX_COMPILER": "cl"
+			},
+			"binaryDir": "${sourceDir}/build-msvc",
+			"toolchainFile": "build/generators/conan_toolchain.cmake",
+			"architecture": {
+				"value": "x64",
+				"strategy": "external"
+			}
+		},
+		{
+			"displayName": "gcc-mingw-base",
+			"name": "gcc-mingw-base",
+			"description": "Configure using GCC with MinGW Makefiles generator",
+			"generator": "MinGW Makefiles",
+			"cacheVariables": {
+				"CONAN_PROFILE": "gcc",
+				"CMAKE_C_COMPILER": "gcc",
+				"CMAKE_CXX_COMPILER": "g++"
+			},
+			"binaryDir": "${sourceDir}/build-gcc",
+			"hidden": true
+		},
+		{
+			"displayName": "gcc-release",
+			"name": "gcc-release",
+			"description": "Configure using GCC with MinGW Makefiles generator (Release)",
+			"inherits": "gcc-mingw-base",
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "Release"
+			},
+			"toolchainFile": "build/Release/generators/conan_toolchain.cmake"
+		},
+		{
+			"displayName": "gcc-debug",
+			"name": "gcc-debug",
+			"description": "Configure using GCC with MinGW Makefiles generator (Debug)",
+			"inherits": "gcc-mingw-base",
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "Debug"
+			},
+			"toolchainFile": "build/Debug/generators/conan_toolchain.cmake"
+		}
+	],
+	"buildPresets": [
+		{
+			"name": "build-clang-debug",
+			"displayName": "Build Clang Debug",
+			"configurePreset": "clang-debug",
+			"jobs": 20
+		},
+		{
+			"name": "build-clang-release",
+			"displayName": "Build Clang Release",
+			"configurePreset": "clang-release",
+			"jobs": 20
+		},
+		{
+			"name": "build-msvc-debug",
+			"displayName": "Build MSVC Debug",
+			"configurePreset": "msvc-vs2022",
+			"configuration": "Debug",
+			"jobs": 20
+		},
+		{
+			"name": "build-msvc-release",
+			"displayName": "Build MSVC Release",
+			"configurePreset": "msvc-vs2022",
+			"configuration": "Release",
+			"jobs": 20
+		},
+		{
+			"name": "build-gcc-debug",
+			"displayName": "Build GCC Debug",
+			"configurePreset": "gcc-debug",
+			"jobs": 20
+		},
+		{
+			"name": "build-gcc-release",
+			"displayName": "Build GCC Release",
+			"configurePreset": "gcc-release",
+			"jobs": 20
+		}
+	],
+	"testPresets": [
+		{
+			"name": "test-clang-debug",
+			"configurePreset": "clang-debug",
+			"configuration": "Debug",
+			"output": {
+				"outputOnFailure": true
+			}
+		},
+		{
+			"name": "test-clang-release",
+			"configurePreset": "clang-release",
+			"configuration": "Release",
+			"output": {
+				"outputOnFailure": true
+			}
+		},
+		{
+			"name": "test-msvc-debug",
+			"configurePreset": "msvc-vs2022",
+			"configuration": "Debug",
+			"output": {
+				"outputOnFailure": true
+			}
+		},
+		{
+			"name": "test-msvc-release",
+			"configurePreset": "msvc-vs2022",
+			"configuration": "Release",
+			"output": {
+				"outputOnFailure": true
+			}
+		},
+		{
+			"name": "test-gcc-debug",
+			"configurePreset": "gcc-debug",
+			"configuration": "Debug",
+			"output": {
+				"outputOnFailure": true
+			}
+		},
+		{
+			"name": "test-gcc-release",
+			"configurePreset": "gcc-release",
+			"configuration": "Release",
+			"output": {
+				"outputOnFailure": true
+			}
+		}
+	]
+}
